@@ -3,7 +3,7 @@
 namespace ofxOrbbec {
 	namespace Streams {
 		//----------
-		const astra::coordinate_mapper & Depth::getCoordinateMapper() const {
+		const astra::CoordinateMapper & Depth::getCoordinateMapper() const {
 			float xyz[3];
 			this->stream->coordinateMapper().convert_depth_to_world(0, 0, 1000, &xyz[0], &xyz[1], &xyz[2]);
 			return this->stream->coordinateMapper();

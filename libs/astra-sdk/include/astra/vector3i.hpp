@@ -14,8 +14,8 @@
 // limitations under the License.
 //
 // Be excellent to each other.
-#ifndef VECTOR3I_H
-#define VECTOR3I_H
+#ifndef ASTRA_VECTOR3I_HPP
+#define ASTRA_VECTOR3I_HPP
 
 #include <cmath>
 #include <cstdint>
@@ -23,21 +23,21 @@
 
 namespace astra {
 
-    struct vector3i : public astra_vector3i_t
+    struct Vector3i : public astra_vector3i_t
     {
-        vector3i()
+        Vector3i()
         {
             this->x = 0;
             this->y = 0;
             this->z = 0;
         }
 
-        vector3i(const astra_vector3i_t& v)
+        Vector3i(const astra_vector3i_t& v)
         {
             *this = v;
         }
 
-        vector3i& operator=(const astra_vector3i_t& rhs)
+        Vector3i& operator=(const astra_vector3i_t& rhs)
         {
             ::astra_vector3i_t::x = rhs.x;
             ::astra_vector3i_t::y = rhs.y;
@@ -46,7 +46,7 @@ namespace astra {
             return *this;
         }
 
-        vector3i(int x, int y, int z)
+        Vector3i(int x, int y, int z)
         {
             this->x = x;
             this->y = y;
@@ -58,81 +58,81 @@ namespace astra {
 
         float length() const;
         std::int32_t length_squared() const;
-        std::int32_t dot(const vector3i& v) const;
+        std::int32_t dot(const Vector3i& v) const;
 
-        vector3i cross(const vector3i& v) const;
+        Vector3i cross(const Vector3i& v) const;
 
-        static vector3i normalize(const vector3i& v);
+        static Vector3i normalize(const Vector3i& v);
 
-        static inline const vector3i& zero();
+        static inline const Vector3i& zero();
 
-        friend bool operator==(const vector3i& lhs, const vector3i& rhs);
-        friend bool operator!=(const vector3i& lhs, const vector3i& rhs);
+        friend bool operator==(const Vector3i& lhs, const Vector3i& rhs);
+        friend bool operator!=(const Vector3i& lhs, const Vector3i& rhs);
 
         bool is_zero() const;
 
-        vector3i& operator+=(const vector3i& rhs);
-        vector3i& operator-=(const vector3i& rhs);
-        vector3i& operator*=(const std::int32_t rhs);
-        vector3i& operator/=(const std::int32_t rhs);
+        Vector3i& operator+=(const Vector3i& rhs);
+        Vector3i& operator-=(const Vector3i& rhs);
+        Vector3i& operator*=(const std::int32_t rhs);
+        Vector3i& operator/=(const std::int32_t rhs);
 
-        friend vector3i operator+(const vector3i& lhs, const vector3i& rhs);
-        friend vector3i operator-(const vector3i& lhs, const vector3i& rhs);
-        friend vector3i operator*(const vector3i& lhs, const std::int32_t rhs);
-        friend vector3i operator*(const float lhs, const vector3i& rhs);
-        friend vector3i operator/(const vector3i& lhs, const std::int32_t rhs);
+        friend Vector3i operator+(const Vector3i& lhs, const Vector3i& rhs);
+        friend Vector3i operator-(const Vector3i& lhs, const Vector3i& rhs);
+        friend Vector3i operator*(const Vector3i& lhs, const std::int32_t rhs);
+        friend Vector3i operator*(const float lhs, const Vector3i& rhs);
+        friend Vector3i operator/(const Vector3i& lhs, const std::int32_t rhs);
 
-        vector3i operator-();
+        Vector3i operator-();
     };
 
-    inline float vector3i::length() const
+    inline float Vector3i::length() const
     {
         return std::sqrt(static_cast<float>(x * x + y * y + z * z));
     }
 
-    inline std::int32_t vector3i::length_squared() const
+    inline std::int32_t Vector3i::length_squared() const
     {
         return x * x + y * y + z * z;
     }
 
-    inline std::int32_t vector3i::dot(const vector3i& v) const
+    inline std::int32_t Vector3i::dot(const Vector3i& v) const
     {
         return x * v.x + y * v.y + z * v.z;
     }
 
-    inline vector3i vector3i::cross(const vector3i& v) const
+    inline Vector3i Vector3i::cross(const Vector3i& v) const
     {
-        return vector3i(
+        return Vector3i(
             static_cast<std::int32_t>(y*v.z - z*v.y),
             static_cast<std::int32_t>(z*v.x - x*v.z),
             static_cast<std::int32_t>(x*v.y - y*v.x));
     }
 
-    inline vector3i vector3i::normalize(const vector3i& v)
+    inline Vector3i Vector3i::normalize(const Vector3i& v)
     {
         double length = sqrt(
             static_cast<float>(v.x*v.x + v.y*v.y + v.z*v.z));
 
         if (length < 1e-9)
         {
-            return vector3i(0, 0, 0);
+            return Vector3i(0, 0, 0);
         }
         else
         {
-            return vector3i(
+            return Vector3i(
                 static_cast<std::int32_t>(v.x / length),
                 static_cast<std::int32_t>(v.y / length),
                 static_cast<std::int32_t>(v.z / length));
         }
     }
 
-    inline bool vector3i::is_zero() const
+    inline bool Vector3i::is_zero() const
     {
-        vector3i zero;
+        Vector3i zero;
         return *this == zero;
     }
 
-    inline vector3i& vector3i::operator+=(const vector3i& rhs)
+    inline Vector3i& Vector3i::operator+=(const Vector3i& rhs)
     {
         this->x = this->x + rhs.x;
         this->y = this->y + rhs.y;
@@ -140,7 +140,7 @@ namespace astra {
         return *this;
     }
 
-    inline vector3i& vector3i::operator-=(const vector3i& rhs)
+    inline Vector3i& Vector3i::operator-=(const Vector3i& rhs)
     {
         this->x = this->x - rhs.x;
         this->y = this->y - rhs.y;
@@ -148,7 +148,7 @@ namespace astra {
         return *this;
     }
 
-    inline vector3i& vector3i::operator*=(const std::int32_t rhs)
+    inline Vector3i& Vector3i::operator*=(const std::int32_t rhs)
     {
         this->x = this->x * rhs;
         this->y = this->y * rhs;
@@ -156,7 +156,7 @@ namespace astra {
         return *this;
     }
 
-    inline vector3i& vector3i::operator/=(const std::int32_t rhs)
+    inline Vector3i& Vector3i::operator/=(const std::int32_t rhs)
     {
         this->x = static_cast<std::int32_t>(this->x / rhs);
         this->y = static_cast<std::int32_t>(this->y / rhs);
@@ -164,54 +164,54 @@ namespace astra {
         return *this;
     }
 
-    inline vector3i vector3i::operator-()
+    inline Vector3i Vector3i::operator-()
     {
-        return vector3i(-this->x, -this->y, -this->z);
+        return Vector3i(-this->x, -this->y, -this->z);
     }
 
-    inline bool operator==(const vector3i& lhs, const vector3i& rhs)
+    inline bool operator==(const Vector3i& lhs, const Vector3i& rhs)
     {
         return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z;
     }
 
-    inline bool operator!=(const vector3i& lhs, const vector3i& rhs)
+    inline bool operator!=(const Vector3i& lhs, const Vector3i& rhs)
     {
         return !(lhs == rhs);
     }
 
-    inline vector3i operator+(const vector3i& lhs, const vector3i& rhs)
+    inline Vector3i operator+(const Vector3i& lhs, const Vector3i& rhs)
     {
-        return vector3i(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
+        return Vector3i(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
     }
 
-    inline vector3i operator-(const vector3i& lhs, const vector3i& rhs)
+    inline Vector3i operator-(const Vector3i& lhs, const Vector3i& rhs)
     {
-        return vector3i(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
+        return Vector3i(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
     }
 
-    inline vector3i operator*(const vector3i& lhs, const std::int32_t rhs)
+    inline Vector3i operator*(const Vector3i& lhs, const std::int32_t rhs)
     {
-        return vector3i(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs);
+        return Vector3i(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs);
     }
 
-    inline vector3i operator*(const std::int32_t lhs, const vector3i& rhs)
+    inline Vector3i operator*(const std::int32_t lhs, const Vector3i& rhs)
     {
         return rhs * lhs;
     }
 
-    inline vector3i operator/(const vector3i& lhs, const std::int32_t rhs)
+    inline Vector3i operator/(const Vector3i& lhs, const std::int32_t rhs)
     {
-        return vector3i(
+        return Vector3i(
             static_cast<std::int32_t>(lhs.x / rhs),
             static_cast<std::int32_t>(lhs.y / rhs),
             static_cast<std::int32_t>(lhs.z / rhs));
     }
 
-    inline const vector3i& vector3i::zero()
+    inline const Vector3i& Vector3i::zero()
     {
-        static vector3i zero;
+        static Vector3i zero;
         return zero;
     }
 }
 
-#endif /* VECTOR3I_H */
+#endif /* ASTRA_VECTOR3I_HPP */

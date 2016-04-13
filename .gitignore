@@ -1,6 +1,7 @@
-libs/
+libs/libskeleton
 docs/
 
+*.cl
 *.depend
 *.layout
 *.mode*v3

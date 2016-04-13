@@ -65,7 +65,7 @@ namespace ofxOrbbec {
 
 		//----------
 		template<typename StreamType, typename FrameType, typename PixelsType>
-		void TemplateBaseImage<StreamType, FrameType, PixelsType>::init(astra::stream_reader & streamReader) {
+		void TemplateBaseImage<StreamType, FrameType, PixelsType>::init(astra::StreamReader & streamReader) {
 			this->stream = make_unique<StreamType>(streamReader.stream<StreamType>());
 			this->stream->start();
 		}
@@ -134,12 +134,12 @@ namespace ofxOrbbec {
 
 		//----------
 		template<typename StreamType, typename FrameType, typename PixelsType>
-		void TemplateBaseImage<StreamType, FrameType, PixelsType>::newFrameArrived(astra::frame & frame) {
+		void TemplateBaseImage<StreamType, FrameType, PixelsType>::newFrameArrived(astra::Frame & frame) {
 			auto ourFrame = frame.get<FrameType>();
 			if (ourFrame.is_valid()) {
 				this->lockIncomingPixels.lock();
 				{
-					this->incomingPixels.setFromPixels((PixelsType*)ourFrame.data(), ourFrame.resolutionX(), ourFrame.resolutionY(), this->getNumChannels());
+					this->incomingPixels.setFromPixels((PixelsType*)ourFrame.data(), ourFrame.width(), ourFrame.height(), this->getNumChannels());
 					this->newFrameIncoming = true;
 				}
 				this->lockIncomingPixels.unlock();
@@ -147,9 +147,9 @@ namespace ofxOrbbec {
 		}
 
 		//---------
-		template class TemplateBaseImage<astra::colorstream, astra::colorframe, unsigned char>;
-		template class TemplateBaseImage<astra::depthstream, astra::depthframe, unsigned short>;
-		template class TemplateBaseImage<astra::infraredstream, astra::infraredframe_16, unsigned short>;
-		template class TemplateBaseImage<astra::pointstream, astra::pointframe, float>;
+		template class TemplateBaseImage<astra::ColorStream, astra::ColorFrame, unsigned char>;
+		template class TemplateBaseImage<astra::DepthStream, astra::DepthFrame, unsigned short>;
+		template class TemplateBaseImage<astra::InfraredStream, astra::InfraredFrame16, unsigned short>;
+		template class TemplateBaseImage<astra::PointStream, astra::PointFrame, float>;
 	}
 }

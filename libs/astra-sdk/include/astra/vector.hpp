@@ -14,12 +14,12 @@
 // limitations under the License.
 //
 // Be excellent to each other.
-#ifndef ASTRA_VECTOR_H
-#define ASTRA_VECTOR_H
+#ifndef ASTRA_VECTOR_HPP
+#define ASTRA_VECTOR_HPP
 
-#include "vector2i.hpp"
-#include "vector2f.hpp"
-#include "vector3i.hpp"
-#include "vector3f.hpp"
+#include "Vector2i.hpp"
+#include "Vector2f.hpp"
+#include "Vector3i.hpp"
+#include "Vector3f.hpp"
 
 #endif // ASTRA_VECTOR_H

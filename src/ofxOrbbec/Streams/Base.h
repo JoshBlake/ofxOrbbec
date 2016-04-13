@@ -14,20 +14,20 @@ namespace ofxOrbbec {
 		class Base {
 		public:
 			virtual string getTypeName() const = 0;
-			virtual void init(astra::stream_reader & streamReader) = 0;
+			virtual void init(astra::StreamReader & streamReader) = 0;
 			virtual void close() = 0;
 			virtual void update() = 0;
 			bool isFrameNew();
 		protected:
 			friend Device;
-			virtual void newFrameArrived(astra::frame &) = 0;
+			virtual void newFrameArrived(astra::Frame &) = 0;
 			bool hasData = false;
 			bool frameNew = false;
 		};
 
 		class BaseImage : public Base, public ofBaseHasTexture, public ofBaseDraws {
 		public:
-			ofTexture & getTexture();
+			ofTexture & getTexture() override;
 			const ofTexture & getTexture() const override;
 			void setUseTexture(bool bUseTex) override;
 			bool isUsingTexture() const override;
@@ -46,7 +46,7 @@ namespace ofxOrbbec {
 		class TemplateBaseImage : public BaseImage, public ofBaseHasPixels_<PixelsType> {
 		public:
 			~TemplateBaseImage();
-			void init(astra::stream_reader & streamReader) override;
+			void init(astra::StreamReader & streamReader) override;
 			void close() override;
 			virtual void update() override;
 
@@ -59,7 +59,7 @@ namespace ofxOrbbec {
 			StreamType getStream();
 		protected:
 			virtual int getNumChannels() = 0;
-			void newFrameArrived(astra::frame &) override;
+			void newFrameArrived(astra::Frame &) override;
 
 			unique_ptr<StreamType> stream;
 			ofPixels_<PixelsType> pixels;

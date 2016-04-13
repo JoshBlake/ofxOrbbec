@@ -4,13 +4,13 @@
 
 namespace ofxOrbbec {
 	namespace Streams {
-		class Depth : public TemplateBaseImage<astra::depthstream, astra::depthframe, unsigned short> {
+		class Depth : public TemplateBaseImage<astra::DepthStream, astra::DepthFrame, unsigned short> {
 		public:
 			string getTypeName() const override {
 				return "Depth";
 			}
 
-			const astra::coordinate_mapper & getCoordinateMapper() const;
+			const astra::CoordinateMapper & getCoordinateMapper() const;
 
 			ofVec3f depthToWorld(const ofVec3f & depthMapPosition);
 			ofVec3f depthToWorld(float x, float y, float depth);

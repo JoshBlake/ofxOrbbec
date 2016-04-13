@@ -8,14 +8,14 @@
 namespace ofxOrbbec {
 	namespace os = orbbec::skeleton;
 	template<typename PixelType>
-	ofPixels_<PixelType> toOf(os::bitmap<PixelType> & bitmap) {
+	ofPixels_<PixelType> toOf(os::Bitmap<PixelType> & bitmap) {
 		ofPixels_<PixelType> pixels;
 		pixels.setFromExternalPixels(bitmap.data(), bitmap.width(), bitmap.height(), bitmap.bpp() / sizeof(PixelType));
 		return pixels;
 	}
 
 	template<typename PixelType>
-	ofPixels_<PixelType> toOf(const os::bitmap<PixelType> & bitmap) {
+	ofPixels_<PixelType> toOf(const os::Bitmap<PixelType> & bitmap) {
 		ofPixels_<PixelType> pixels;
 		pixels.setFromPixels(bitmap.data(), bitmap.width(), bitmap.height(), bitmap.bpp() / sizeof(PixelType));
 		return pixels;
@@ -27,5 +27,5 @@ namespace ofxOrbbec {
 	ORBBECTYPE & toOrbbec(OFTYPE & x); \
 	const ORBBECTYPE & toOrbbec(const OFTYPE & x);
 
-	OFXORBBEC_MATCHED_TYPE_HEADER(ofVec3f, os::vector3f);
+	OFXORBBEC_MATCHED_TYPE_HEADER(ofVec3f, os::Vector3f);
 }

@@ -40,7 +40,7 @@ namespace astra { namespace serialization {
 
         bool begin_write();
         bool end_write();
-        bool write(depthframe& depthFrame);
+        bool write(const DepthFrame& depthFrame);
 
     private:
         void stage_frame(astra_frame_t& astraFrame);

@@ -17,13 +17,13 @@
 #ifndef ASTRA_HPP
 #define ASTRA_HPP
 
-#include "vector.hpp"
-#include "streams/astra_depth.hpp"
-#include "streams/astra_color.hpp"
-#include "streams/astra_infrared.hpp"
-#include "streams/astra_hand.hpp"
-#include "streams/astra_debug_hand.hpp"
-#include "streams/astra_skeleton.hpp"
-#include "streams/astra_point.hpp"
+#include "Vector.hpp"
+#include "streams/Depth.hpp"
+#include "streams/Color.hpp"
+#include "streams/Infrared.hpp"
+#include "streams/Hand.hpp"
+#include "streams/DebugHand.hpp"
+#include "streams/Skeleton.hpp"
+#include "streams/Point.hpp"
 
 #endif /* ASTRA_HPP */

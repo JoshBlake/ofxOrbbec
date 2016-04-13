@@ -14,5 +14,5 @@
 	}
 
 namespace ofxOrbbec {
-	OFXORBBEC_MATCHED_TYPE_BODY(ofVec3f, os::vector3f);
+	OFXORBBEC_MATCHED_TYPE_BODY(ofVec3f, os::Vector3f);
 }

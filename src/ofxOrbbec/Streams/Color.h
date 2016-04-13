@@ -4,7 +4,7 @@
 
 namespace ofxOrbbec {
 	namespace Streams {
-		class Color : public TemplateBaseImage<astra::colorstream, astra::colorframe, unsigned char> {
+		class Color : public TemplateBaseImage<astra::ColorStream, astra::ColorFrame, unsigned char> {
 		public:
 			string getTypeName() const override {
 				return "Color";

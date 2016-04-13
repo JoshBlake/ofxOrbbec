@@ -5,7 +5,7 @@
 #include "Streams/Depth.h"
 #include "Streams/Infrared.h"
 #include "Streams/Points.h"
-#include "Streams/Skeleton.h"
+#include "Streams/BodyStream.h"
 
 #include "astra/astra.hpp"
 
@@ -13,7 +13,7 @@
 #include <memory>
 
 namespace ofxOrbbec {
-	class Device : public astra::frame_listener {
+	class Device : public astra::FrameListener {
 	public:
 		Device();
 		~Device();
@@ -43,7 +43,7 @@ namespace ofxOrbbec {
 		shared_ptr<Streams::Depth> initDepth();
 		shared_ptr<Streams::Infrared> initInfrared();
 		shared_ptr<Streams::Points> initPoints();
-		shared_ptr<Streams::Skeleton> initSkeleton();
+		shared_ptr<Streams::BodyStream> initBodyStream();
 		
 		template<typename StreamType>
 		bool has() {
@@ -72,7 +72,7 @@ namespace ofxOrbbec {
 		void closeDepth();
 		void closeInfrared();
 		void closePoints();
-		void closeSkeleton();
+		void closeBodyStream();
 
 		void update();
 		bool isFrameNew() const;
@@ -96,14 +96,14 @@ namespace ofxOrbbec {
 		shared_ptr<Streams::Depth> getDepth();
 		shared_ptr<Streams::Infrared> getInfrared();
 		shared_ptr<Streams::Points> getPoints();
-		shared_ptr<Streams::Skeleton> getSkeleton();
+		shared_ptr<Streams::BodyStream> getBodyStream();
 		vector<shared_ptr<Streams::Base>> getStreams();
 
 	protected:
-		void on_frame_ready(astra::stream_reader& reader, astra::frame& frame) override;
+		void on_frame_ready(astra::StreamReader& reader, astra::Frame& frame) override;
 
-		astra::streamset streamSet;
-		astra::stream_reader streamReader;
+		astra::StreamSet streamSet;
+		astra::StreamReader streamReader;
 		std::vector<std::shared_ptr<Streams::Base>> streams;
 	
 		queue<chrono::high_resolution_clock::time_point> incomingFrameTimes;

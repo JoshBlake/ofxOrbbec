@@ -42,8 +42,8 @@ namespace ofxOrbbec {
 	}
 
 	//----------
-	shared_ptr<Streams::Skeleton> Device::initSkeleton() {
-		return this->init<Streams::Skeleton>();
+	shared_ptr<Streams::BodyStream> Device::initBodyStream() {
+		return this->init<Streams::BodyStream>();
 	}
 
 	//----------
@@ -102,8 +102,8 @@ namespace ofxOrbbec {
 	}
 
 	//----------
-	shared_ptr<Streams::Skeleton> Device::getSkeleton() {
-		return this->get<Streams::Skeleton>();
+	shared_ptr<Streams::BodyStream> Device::getBodyStream() {
+		return this->get<Streams::BodyStream>();
 	}
 
 	//----------
@@ -112,7 +112,7 @@ namespace ofxOrbbec {
 	}
 
 	//----------
-	void Device::on_frame_ready(astra::stream_reader& reader, astra::frame& frame) {
+	void Device::on_frame_ready(astra::StreamReader& reader, astra::Frame& frame) {
 		for (auto stream : this->streams) {
 			stream->newFrameArrived(frame);
 		}
@@ -139,7 +139,7 @@ namespace ofxOrbbec {
 	}
 
 	//----------
-	void Device::closeSkeleton() {
-		this->close<Streams::Skeleton>();
+	void Device::closeBodyStream() {
+		this->close<Streams::BodyStream>();
 	}
 }

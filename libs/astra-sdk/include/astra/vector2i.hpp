@@ -14,8 +14,8 @@
 // limitations under the License.
 //
 // Be excellent to each other.
-#ifndef VECTOR2I_H
-#define VECTOR2I_H
+#ifndef ASTRA_VECTOR2I_HPP
+#define ASTRA_VECTOR2I_HPP
 
 #include <cmath>
 #include <cstdint>
@@ -23,20 +23,20 @@
 
 namespace astra
 {
-    struct vector2i : public astra_vector2i_t
+    struct Vector2i : public astra_vector2i_t
     {
-        vector2i()
+        Vector2i()
         {
             this->x = 0;
             this->y = 0;
         }
 
-        vector2i(const astra_vector2i_t& v)
+        Vector2i(const astra_vector2i_t& v)
         {
             *this = v;
         }
 
-        vector2i& operator=(const astra_vector2i_t& rhs)
+        Vector2i& operator=(const astra_vector2i_t& rhs)
         {
             ::astra_vector2i_t::x = rhs.x;
             ::astra_vector2i_t::y = rhs.y;
@@ -44,7 +44,7 @@ namespace astra
             return *this;
         }
 
-        vector2i(int x, int y)
+        Vector2i(int x, int y)
         {
             this->x = x;
             this->y = y;
@@ -55,84 +55,84 @@ namespace astra
 
         float length() const;
         std::int32_t length_squared() const;
-        std::int32_t dot(const vector2i& v) const;
+        std::int32_t dot(const Vector2i& v) const;
 
-        static vector2i normalize(const vector2i& v);
+        static Vector2i normalize(const Vector2i& v);
 
-        static inline const vector2i& zero();
+        static inline const Vector2i& zero();
 
         inline bool is_zero() const;
 
-        friend bool operator==(const vector2i& lhs, const vector2i& rhs);
-        friend vector2i operator+(const vector2i& lhs, const vector2i& rhs);
-        friend vector2i operator-(const vector2i& lhs, const vector2i& rhs);
-        friend vector2i operator*(const vector2i& lhs, const std::int32_t rhs);
-        friend vector2i operator*(const std::int32_t lhs, const vector2i& rhs);
-        friend vector2i operator/(const vector2i& lhs, const std::int32_t rhs);
+        friend bool operator==(const Vector2i& lhs, const Vector2i& rhs);
+        friend Vector2i operator+(const Vector2i& lhs, const Vector2i& rhs);
+        friend Vector2i operator-(const Vector2i& lhs, const Vector2i& rhs);
+        friend Vector2i operator*(const Vector2i& lhs, const std::int32_t rhs);
+        friend Vector2i operator*(const std::int32_t lhs, const Vector2i& rhs);
+        friend Vector2i operator/(const Vector2i& lhs, const std::int32_t rhs);
 
-        vector2i operator-();
-        vector2i& operator+=(const vector2i& rhs);
-        vector2i& operator-=(const vector2i& rhs);
-        vector2i& operator*=(const std::int32_t rhs);
-        vector2i& operator/=(const std::int32_t rhs);
+        Vector2i operator-();
+        Vector2i& operator+=(const Vector2i& rhs);
+        Vector2i& operator-=(const Vector2i& rhs);
+        Vector2i& operator*=(const std::int32_t rhs);
+        Vector2i& operator/=(const std::int32_t rhs);
     };
 
-    inline vector2i vector2i::normalize(const vector2i& v)
+    inline Vector2i Vector2i::normalize(const Vector2i& v)
     {
         double length = std::sqrt(
             static_cast<float>(v.x*v.x + v.y*v.y));
 
         if (length < 1e-9)
         {
-            return vector2i(0, 0);
+            return Vector2i(0, 0);
         }
         else
         {
-            return vector2i(
+            return Vector2i(
                 static_cast<std::int32_t>(v.x / length),
                 static_cast<std::int32_t>(v.y / length));
         }
     }
 
-    inline float vector2i::length() const
+    inline float Vector2i::length() const
     {
         return std::sqrt(
             static_cast<float>(x * x + y * y));
     }
 
-    inline std::int32_t vector2i::length_squared() const
+    inline std::int32_t Vector2i::length_squared() const
     {
         return x * x + y * y;
     }
 
 
-    inline std::int32_t vector2i::dot(const vector2i& v) const
+    inline std::int32_t Vector2i::dot(const Vector2i& v) const
     {
         return x * v.x + y * v.y;
     }
 
-    inline vector2i& vector2i::operator+=(const vector2i& rhs)
+    inline Vector2i& Vector2i::operator+=(const Vector2i& rhs)
     {
         this->x = this->x + rhs.x;
         this->y = this->y + rhs.y;
         return *this;
     }
 
-    inline vector2i& vector2i::operator-=(const vector2i& rhs)
+    inline Vector2i& Vector2i::operator-=(const Vector2i& rhs)
     {
         this->x = this->x - rhs.x;
         this->y = this->y - rhs.y;
         return *this;
     }
 
-    inline vector2i& vector2i::operator*=(const std::int32_t rhs)
+    inline Vector2i& Vector2i::operator*=(const std::int32_t rhs)
     {
         this->x = static_cast<std::int32_t>(this->x * rhs);
         this->y = static_cast<std::int32_t>(this->y * rhs);
         return *this;
     }
 
-    inline vector2i& vector2i::operator/=(const std::int32_t rhs)
+    inline Vector2i& Vector2i::operator/=(const std::int32_t rhs)
     {
         this->x = static_cast<std::int32_t>(this->x / rhs);
         this->y = static_cast<std::int32_t>(this->y / rhs);
@@ -140,60 +140,60 @@ namespace astra
         return *this;
     }
 
-    inline vector2i vector2i::operator-()
+    inline Vector2i Vector2i::operator-()
     {
-        return vector2i(-this->x, -this->y);
+        return Vector2i(-this->x, -this->y);
     }
 
-    inline bool operator==(const vector2i& lhs, const vector2i& rhs)
+    inline bool operator==(const Vector2i& lhs, const Vector2i& rhs)
     {
         return lhs.x == rhs.x && lhs.y == rhs.y;
     }
 
-    inline bool operator!=(const vector2i& lhs, const vector2i& rhs)
+    inline bool operator!=(const Vector2i& lhs, const Vector2i& rhs)
     {
         return !(lhs == rhs);
     }
 
-    inline vector2i operator+(const vector2i& lhs, const vector2i& rhs)
+    inline Vector2i operator+(const Vector2i& lhs, const Vector2i& rhs)
     {
-        return vector2i(lhs.x + rhs.x, lhs.y + rhs.y);
+        return Vector2i(lhs.x + rhs.x, lhs.y + rhs.y);
     }
 
-    inline vector2i operator-(const vector2i& lhs, const vector2i& rhs)
+    inline Vector2i operator-(const Vector2i& lhs, const Vector2i& rhs)
     {
-        return vector2i(lhs.x - rhs.x, lhs.y - rhs.y);
+        return Vector2i(lhs.x - rhs.x, lhs.y - rhs.y);
     }
 
-    inline vector2i operator*(const vector2i& lhs, const std::int32_t rhs)
+    inline Vector2i operator*(const Vector2i& lhs, const std::int32_t rhs)
     {
-        return vector2i(
+        return Vector2i(
             static_cast<std::int32_t>(lhs.x * rhs),
             static_cast<std::int32_t>(lhs.y * rhs));
     }
 
-    inline vector2i operator*(const std::int32_t lhs, const vector2i& rhs)
+    inline Vector2i operator*(const std::int32_t lhs, const Vector2i& rhs)
     {
         return rhs * lhs;
     }
 
-    inline vector2i operator/(const vector2i& lhs, const std::int32_t rhs)
+    inline Vector2i operator/(const Vector2i& lhs, const std::int32_t rhs)
     {
-        return vector2i(
+        return Vector2i(
             static_cast<std::int32_t>(lhs.x / rhs),
             static_cast<std::int32_t>(lhs.y / rhs));
     }
 
-    inline const vector2i& vector2i::zero()
+    inline const Vector2i& Vector2i::zero()
     {
-        static vector2i zero;
+        static Vector2i zero;
         return zero;
     }
 
-    inline bool vector2i::is_zero() const
+    inline bool Vector2i::is_zero() const
     {
         return *this == zero();
     }
 }
 
-#endif // VECTOR2I_H
+#endif // ASTRA_VECTOR2I_HPP

@@ -3,14 +3,14 @@
 namespace ofxOrbbec {
 	namespace Streams {
 		//----------
-		void Infrared::init(astra::stream_reader & streamReader) {
-			this->stream = make_unique<astra::infraredstream>(streamReader.stream<astra::infraredstream>());
+		void Infrared::init(astra::StreamReader & streamReader) {
+			this->stream = make_unique<astra::InfraredStream>(streamReader.stream<astra::InfraredStream>());
 
 			{
-				astra::imagestream_mode irMode;
+				astra::ImageStreamMode irMode;
 				irMode.set_width(640);
 				irMode.set_height(480);
-				irMode.set_pixelFormat(astra_pixel_formats::ASTRA_PIXEL_FORMAT_GRAY16);
+				irMode.set_pixel_format(astra_pixel_formats::ASTRA_PIXEL_FORMAT_GRAY16);
 				irMode.set_fps(30);
 				this->stream->set_mode(irMode);
 			}

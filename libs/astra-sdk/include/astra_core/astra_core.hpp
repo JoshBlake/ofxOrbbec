@@ -17,12 +17,12 @@
 #ifndef ASTRA_CORE_HPP
 #define ASTRA_CORE_HPP
 
-#include "astra_streamset.hpp"
-#include "astra_stream_description.hpp"
-#include "astra_frame.hpp"
-#include "astra_frame_listener.hpp"
-#include "astra_stream_reader.hpp"
-#include "astra_datastream.hpp"
+#include "StreamSet.hpp"
+#include "StreamDescription.hpp"
+#include "Frame.hpp"
+#include "FrameListener.hpp"
+#include "StreamReader.hpp"
+#include "DataStream.hpp"
 #include "astra_cxx_make_unique.hpp"
 
 namespace astra {

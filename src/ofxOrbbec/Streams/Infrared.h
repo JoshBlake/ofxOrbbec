@@ -4,12 +4,12 @@
 
 namespace ofxOrbbec {
 	namespace Streams {
-		class Infrared : public TemplateBaseImage<astra::infraredstream, astra::infraredframe_16, unsigned short> {
+		class Infrared : public TemplateBaseImage<astra::InfraredStream, astra::InfraredFrame16, unsigned short> {
 		public:
 			string getTypeName() const override {
 				return "Infrared";
 			}
-			void init(astra::stream_reader & streamReader) override;
+			void init(astra::StreamReader & streamReader) override;
 
 		protected:
 			int getNumChannels() override {

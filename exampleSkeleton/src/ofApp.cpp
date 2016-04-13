@@ -5,7 +5,7 @@ void ofApp::setup(){
 	this->astra.open();
 	this->astra.initDepth();
 	this->astra.initPoints();
-	this->astra.initSkeleton();
+	this->astra.initBodyStream();
 }
 
 //--------------------------------------------------------------
@@ -13,21 +13,21 @@ void ofApp::update(){
 	this->astra.update();
 	if (this->astra.isFrameNew()) {
 		{
-			auto pixels = this->astra.getSkeleton()->getUserMask();
+			auto pixels = this->astra.getBodyStream()->getUserMask();
 			for (auto & pixel : pixels) {
 				pixel *= 255;
 			}
 			this->userMask.loadData(pixels);
 		}
 		{
-			auto pixels = this->astra.getSkeleton()->getLabelsImage();
+			auto pixels = this->astra.getBodyStream()->getLabelsImage();
 			for (auto & pixel : pixels) {
 				pixel *= 16;
 			}
 			this->labels.loadData(pixels);
 		}
 		{
-			this->probability.loadData(this->astra.getSkeleton()->getProbabilityMap(labelIndex));
+			this->probability.loadData(this->astra.getBodyStream()->getProbabilityMap(labelIndex));
 		}
 	}
 }
@@ -43,13 +43,17 @@ void ofApp::draw(){
 
 	ofPushStyle();
 	{
-		ofSetLineWidth(3.0f);
-		ofSetColor(0);
-		this->astra.getSkeleton()->drawSkeleton2D();
+        const auto& bodies = this->astra.getBodyStream()->bodies();
+        for (const auto& body : bodies)
+        {
+            ofSetLineWidth(3.0f);
+            ofSetColor(0);
+            ofxOrbbec::Streams::BodyStream::drawSkeleton2D(body);
 
-		ofSetLineWidth(1.0f);
-		ofSetColor(255);
-		this->astra.getSkeleton()->drawSkeleton2D();
+            ofSetLineWidth(1.0f);
+            ofSetColor(255);
+            ofxOrbbec::Streams::BodyStream::drawSkeleton2D(body);
+        }
 	}
 	ofPopStyle();
 
